@@ -1,0 +1,21 @@
+# weights: tỉ lệ tương đối. pity: "nếu N lần ấp liên tiếp chưa ra độ hiếm >= X thì lần N chắc chắn ra >= X".
+eggs:
+  basic:
+    name: "Trứng Thường"
+    cost: 100
+    hatch-seconds: 60
+    weights: {COMMON: 60, UNCOMMON: 28, RARE: 10, EPIC: 2}
+    pity: {RARE: 10, EPIC: 50}
+  elemental_fire:
+    name: "Trứng Hỏa Nguyên"
+    cost: 400
+    hatch-seconds: 300
+    element: FIRE            # chỉ ra pet hệ này (nếu pool rỗng sẽ lấy hệ bất kỳ)
+    weights: {UNCOMMON: 40, RARE: 35, EPIC: 18, LEGENDARY: 6, MYTHIC: 1}
+    pity: {EPIC: 15, LEGENDARY: 60, MYTHIC: 200}
+  mythic_egg:
+    name: "Trứng Thần Thoại"
+    cost: 3000
+    hatch-seconds: 1800
+    weights: {EPIC: 50, LEGENDARY: 38, MYTHIC: 11, ANCIENT: 1}
+    pity: {LEGENDARY: 10, MYTHIC: 40, ANCIENT: 300}

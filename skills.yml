@@ -1,0 +1,15 @@
+# type: ACTIVE|PASSIVE ; effect: DAMAGE AOE HEAL SHIELD SLOW BURN SPEED | STAT_HP STAT_ATK STAT_DEF STAT_SPEED
+# power: hệ số (active) hoặc +% mỗi cấp (passive). mythic-skill: tên skill MythicMobs tùy chọn (cần MythicMobs).
+skills:
+  strike:      {name: "Đòn Đánh", type: ACTIVE, effect: DAMAGE, power: 1.2, cooldown: 4, max-level: 5}
+  blaze_burst: {name: "Bùng Nổ", type: ACTIVE, effect: AOE, power: 0.9, cooldown: 10, max-level: 5}
+  chain_bite:  {name: "Cắn Xé", type: ACTIVE, effect: BURN, power: 1.0, cooldown: 7, max-level: 5}
+  guard:       {name: "Hộ Thể", type: ACTIVE, effect: SHIELD, power: 1.0, cooldown: 12, max-level: 5}
+  fortify:     {name: "Kiên Cố", type: ACTIVE, effect: SHIELD, power: 1.5, cooldown: 20, max-level: 5}
+  taunt_roar:  {name: "Gầm Khiêu Khích", type: ACTIVE, effect: SLOW, power: 1.0, cooldown: 15, max-level: 5}
+  mend:        {name: "Chữa Trị", type: ACTIVE, effect: HEAL, power: 0.8, cooldown: 6, max-level: 5}
+  sanctuary:   {name: "Thánh Địa", type: ACTIVE, effect: HEAL, power: 1.6, cooldown: 25, max-level: 5}
+  vital_aura:  {name: "Sinh Khí", type: ACTIVE, effect: SPEED, power: 1.0, cooldown: 18, max-level: 5}
+  vitality:    {name: "Sinh Lực", type: PASSIVE, effect: STAT_HP, power: 0.04, max-level: 5}
+  power_up:    {name: "Cuồng Nộ", type: PASSIVE, effect: STAT_ATK, power: 0.04, max-level: 5}
+  swift:       {name: "Nhanh Nhẹn", type: PASSIVE, effect: STAT_SPEED, power: 0.03, max-level: 5}

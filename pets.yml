@@ -1,0 +1,489 @@
+# 42 pet mẫu: 6 hệ x 6 độ hiếm + 6 pet Ancient. Thêm pet mới: copy một khối, đổi id. Không giới hạn số lượng.
+# Trường tùy chọn: mythic-mob (id MythicMobs), icon (Material), evolutions (nhiều nhánh).
+pets:
+  fire_common:
+    name: "Hỏa Hồ"
+    element: FIRE
+    rarity: COMMON
+    role: DPS
+    entity: FOX
+    icon: FOX_SPAWN_EGG
+    base: {hp: 30, atk: 6.0, def: 2.0, speed: 10}
+    growth: {hp: 2.50, atk: 0.50, def: 0.13, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: fire_uncommon, level: 10, star: 0, souls: 200, materials: {fire_core: 1}}
+  fire_uncommon:
+    name: "Viêm Linh"
+    element: FIRE
+    rarity: UNCOMMON
+    role: TANK
+    entity: BLAZE
+    icon: BLAZE_SPAWN_EGG
+    base: {hp: 54, atk: 3.5, def: 4.8, speed: 11}
+    growth: {hp: 4.50, atk: 0.29, def: 0.32, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: fire_rare, level: 18, star: 1, souls: 400, materials: {fire_core: 2}}
+  fire_rare:
+    name: "Nham Thú"
+    element: FIRE
+    rarity: RARE
+    role: HEALER
+    entity: MAGMA_CUBE
+    icon: MAGMA_CUBE_SPAWN_EGG
+    base: {hp: 48, atk: 4.8, def: 4.0, speed: 12}
+    growth: {hp: 4.03, atk: 0.40, def: 0.27, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: fire_epic, level: 26, star: 2, souls: 600, materials: {fire_core: 3}}
+  fire_epic:
+    name: "Hỏa Mã"
+    element: FIRE
+    rarity: EPIC
+    role: DPS
+    entity: STRIDER
+    icon: STRIDER_SPAWN_EGG
+    base: {hp: 54, atk: 12.0, def: 5.0, speed: 13}
+    growth: {hp: 4.50, atk: 1.00, def: 0.33, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: fire_legendary, level: 34, star: 3, souls: 800, materials: {fire_core: 4}}
+  fire_legendary:
+    name: "Hỏa Trư"
+    element: FIRE
+    rarity: LEGENDARY
+    role: TANK
+    entity: PIGLIN
+    icon: PIGLIN_SPAWN_EGG
+    base: {hp: 99, atk: 7.0, def: 11.2, speed: 14}
+    growth: {hp: 8.25, atk: 0.58, def: 0.75, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: fire_mythic, level: 42, star: 3, souls: 1000, materials: {fire_core: 5}}
+      - {to: fire_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, fire_core: 10}}
+  fire_mythic:
+    name: "Liệt Hỏa Trư"
+    element: FIRE
+    rarity: MYTHIC
+    role: HEALER
+    entity: HOGLIN
+    icon: HOGLIN_SPAWN_EGG
+    base: {hp: 88, atk: 10.4, def: 9.0, speed: 15}
+    growth: {hp: 7.33, atk: 0.87, def: 0.60, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+  fire_ancient:
+    name: "Hỏa Hồ Cổ Đại"
+    element: FIRE
+    rarity: ANCIENT
+    role: DPS
+    entity: FOX
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  ice_common:
+    name: "Băng Hùng"
+    element: ICE
+    rarity: COMMON
+    role: TANK
+    entity: POLAR_BEAR
+    icon: POLAR_BEAR_SPAWN_EGG
+    base: {hp: 45, atk: 2.8, def: 3.2, speed: 10}
+    growth: {hp: 3.75, atk: 0.23, def: 0.21, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: ice_uncommon, level: 10, star: 0, souls: 200, materials: {ice_core: 1}}
+  ice_uncommon:
+    name: "Tuyết Linh"
+    element: ICE
+    rarity: UNCOMMON
+    role: HEALER
+    entity: SNOW_GOLEM
+    icon: SNOW_GOLEM_SPAWN_EGG
+    base: {hp: 40, atk: 4.0, def: 3.0, speed: 11}
+    growth: {hp: 3.30, atk: 0.33, def: 0.20, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: ice_rare, level: 18, star: 1, souls: 400, materials: {ice_core: 2}}
+  ice_rare:
+    name: "Sương Cốt"
+    element: ICE
+    rarity: RARE
+    role: DPS
+    entity: STRAY
+    icon: STRAY_SPAWN_EGG
+    base: {hp: 44, atk: 9.0, def: 4.0, speed: 12}
+    growth: {hp: 3.67, atk: 0.75, def: 0.27, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: ice_epic, level: 26, star: 2, souls: 600, materials: {ice_core: 3}}
+  ice_epic:
+    name: "Băng Dương"
+    element: ICE
+    rarity: EPIC
+    role: TANK
+    entity: GOAT
+    icon: GOAT_SPAWN_EGG
+    base: {hp: 81, atk: 5.6, def: 8.0, speed: 13}
+    growth: {hp: 6.75, atk: 0.47, def: 0.53, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: ice_legendary, level: 34, star: 3, souls: 800, materials: {ice_core: 4}}
+  ice_legendary:
+    name: "Hàn Lang"
+    element: ICE
+    rarity: LEGENDARY
+    role: HEALER
+    entity: WOLF
+    icon: WOLF_SPAWN_EGG
+    base: {hp: 73, atk: 8.0, def: 7.0, speed: 14}
+    growth: {hp: 6.05, atk: 0.67, def: 0.47, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: ice_mythic, level: 42, star: 3, souls: 1000, materials: {ice_core: 5}}
+      - {to: ice_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, ice_core: 10}}
+  ice_mythic:
+    name: "Tuyết Thố"
+    element: ICE
+    rarity: MYTHIC
+    role: DPS
+    entity: RABBIT
+    icon: RABBIT_SPAWN_EGG
+    base: {hp: 80, atk: 19.5, def: 9.0, speed: 15}
+    growth: {hp: 6.67, atk: 1.62, def: 0.60, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  ice_ancient:
+    name: "Băng Hùng Cổ Đại"
+    element: ICE
+    rarity: ANCIENT
+    role: DPS
+    entity: POLAR_BEAR
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  lightning_common:
+    name: "Lôi Điểu"
+    element: LIGHTNING
+    rarity: COMMON
+    role: HEALER
+    entity: PARROT
+    icon: PARROT_SPAWN_EGG
+    base: {hp: 33, atk: 3.2, def: 2.0, speed: 10}
+    growth: {hp: 2.75, atk: 0.27, def: 0.13, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: lightning_uncommon, level: 10, star: 0, souls: 200, materials: {lightning_core: 1}}
+  lightning_uncommon:
+    name: "Lôi Phong"
+    element: LIGHTNING
+    rarity: UNCOMMON
+    role: DPS
+    entity: BEE
+    icon: BEE_SPAWN_EGG
+    base: {hp: 36, atk: 7.5, def: 3.0, speed: 11}
+    growth: {hp: 3.00, atk: 0.62, def: 0.20, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: lightning_rare, level: 18, star: 1, souls: 400, materials: {lightning_core: 2}}
+  lightning_rare:
+    name: "Lôi Miêu"
+    element: LIGHTNING
+    rarity: RARE
+    role: TANK
+    entity: CAT
+    icon: CAT_SPAWN_EGG
+    base: {hp: 66, atk: 4.2, def: 6.4, speed: 12}
+    growth: {hp: 5.50, atk: 0.35, def: 0.43, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: lightning_epic, level: 26, star: 2, souls: 600, materials: {lightning_core: 3}}
+  lightning_epic:
+    name: "Lôi Linh"
+    element: LIGHTNING
+    rarity: EPIC
+    role: HEALER
+    entity: VEX
+    icon: VEX_SPAWN_EGG
+    base: {hp: 59, atk: 6.4, def: 5.0, speed: 13}
+    growth: {hp: 4.95, atk: 0.53, def: 0.33, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: lightning_legendary, level: 34, star: 3, souls: 800, materials: {lightning_core: 4}}
+  lightning_legendary:
+    name: "Lôi Tinh"
+    element: LIGHTNING
+    rarity: LEGENDARY
+    role: DPS
+    entity: ALLAY
+    icon: ALLAY_SPAWN_EGG
+    base: {hp: 66, atk: 15.0, def: 7.0, speed: 14}
+    growth: {hp: 5.50, atk: 1.25, def: 0.47, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: lightning_mythic, level: 42, star: 3, souls: 1000, materials: {lightning_core: 5}}
+      - {to: lightning_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, lightning_core: 10}}
+  lightning_mythic:
+    name: "Lôi Dực"
+    element: LIGHTNING
+    rarity: MYTHIC
+    role: TANK
+    entity: PHANTOM
+    icon: PHANTOM_SPAWN_EGG
+    base: {hp: 120, atk: 9.1, def: 14.4, speed: 15}
+    growth: {hp: 10.00, atk: 0.76, def: 0.96, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+  lightning_ancient:
+    name: "Lôi Điểu Cổ Đại"
+    element: LIGHTNING
+    rarity: ANCIENT
+    role: DPS
+    entity: PARROT
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  dark_common:
+    name: "Dạ Bức"
+    element: DARK
+    rarity: COMMON
+    role: DPS
+    entity: BAT
+    icon: BAT_SPAWN_EGG
+    base: {hp: 30, atk: 6.0, def: 2.0, speed: 10}
+    growth: {hp: 2.50, atk: 0.50, def: 0.13, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: dark_uncommon, level: 10, star: 0, souls: 200, materials: {dark_core: 1}}
+  dark_uncommon:
+    name: "Ám Chu"
+    element: DARK
+    rarity: UNCOMMON
+    role: TANK
+    entity: SPIDER
+    icon: SPIDER_SPAWN_EGG
+    base: {hp: 54, atk: 3.5, def: 4.8, speed: 11}
+    growth: {hp: 4.50, atk: 0.29, def: 0.32, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: dark_rare, level: 18, star: 1, souls: 400, materials: {dark_core: 2}}
+  dark_rare:
+    name: "Hư Không Nhân"
+    element: DARK
+    rarity: RARE
+    role: HEALER
+    entity: ENDERMAN
+    icon: ENDERMAN_SPAWN_EGG
+    base: {hp: 48, atk: 4.8, def: 4.0, speed: 12}
+    growth: {hp: 4.03, atk: 0.40, def: 0.27, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: dark_epic, level: 26, star: 2, souls: 600, materials: {dark_core: 3}}
+  dark_epic:
+    name: "Ám Thú"
+    element: DARK
+    rarity: EPIC
+    role: DPS
+    entity: WARDEN
+    icon: WARDEN_SPAWN_EGG
+    base: {hp: 54, atk: 12.0, def: 5.0, speed: 13}
+    growth: {hp: 4.50, atk: 1.00, def: 0.33, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: dark_legendary, level: 34, star: 3, souls: 800, materials: {dark_core: 4}}
+  dark_legendary:
+    name: "Độc Nhện"
+    element: DARK
+    rarity: LEGENDARY
+    role: TANK
+    entity: CAVE_SPIDER
+    icon: CAVE_SPIDER_SPAWN_EGG
+    base: {hp: 99, atk: 7.0, def: 11.2, speed: 14}
+    growth: {hp: 8.25, atk: 0.58, def: 0.75, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: dark_mythic, level: 42, star: 3, souls: 1000, materials: {dark_core: 5}}
+      - {to: dark_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, dark_core: 10}}
+  dark_mythic:
+    name: "Tử Cốt"
+    element: DARK
+    rarity: MYTHIC
+    role: HEALER
+    entity: WITHER_SKELETON
+    icon: WITHER_SKELETON_SPAWN_EGG
+    base: {hp: 88, atk: 10.4, def: 9.0, speed: 15}
+    growth: {hp: 7.33, atk: 0.87, def: 0.60, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+  dark_ancient:
+    name: "Dạ Bức Cổ Đại"
+    element: DARK
+    rarity: ANCIENT
+    role: DPS
+    entity: BAT
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  light_common:
+    name: "Quang Tinh"
+    element: LIGHT
+    rarity: COMMON
+    role: TANK
+    entity: ALLAY
+    icon: ALLAY_SPAWN_EGG
+    base: {hp: 45, atk: 2.8, def: 3.2, speed: 10}
+    growth: {hp: 3.75, atk: 0.23, def: 0.21, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: light_uncommon, level: 10, star: 0, souls: 200, materials: {light_core: 1}}
+  light_uncommon:
+    name: "Thánh Vệ"
+    element: LIGHT
+    rarity: UNCOMMON
+    role: HEALER
+    entity: IRON_GOLEM
+    icon: IRON_GOLEM_SPAWN_EGG
+    base: {hp: 40, atk: 4.0, def: 3.0, speed: 11}
+    growth: {hp: 3.30, atk: 0.33, def: 0.20, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: light_rare, level: 18, star: 1, souls: 400, materials: {light_core: 2}}
+  light_rare:
+    name: "Quang Lạc"
+    element: LIGHT
+    rarity: RARE
+    role: DPS
+    entity: LLAMA
+    icon: LLAMA_SPAWN_EGG
+    base: {hp: 44, atk: 9.0, def: 4.0, speed: 12}
+    growth: {hp: 3.67, atk: 0.75, def: 0.27, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: light_epic, level: 26, star: 2, souls: 600, materials: {light_core: 3}}
+  light_epic:
+    name: "Thủy Quang"
+    element: LIGHT
+    rarity: EPIC
+    role: TANK
+    entity: AXOLOTL
+    icon: AXOLOTL_SPAWN_EGG
+    base: {hp: 81, atk: 5.6, def: 8.0, speed: 13}
+    growth: {hp: 6.75, atk: 0.47, def: 0.53, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: light_legendary, level: 34, star: 3, souls: 800, materials: {light_core: 4}}
+  light_legendary:
+    name: "Thánh Giác"
+    element: LIGHT
+    rarity: LEGENDARY
+    role: HEALER
+    entity: SNIFFER
+    icon: SNIFFER_SPAWN_EGG
+    base: {hp: 73, atk: 8.0, def: 7.0, speed: 14}
+    growth: {hp: 6.05, atk: 0.67, def: 0.47, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: light_mythic, level: 42, star: 3, souls: 1000, materials: {light_core: 5}}
+      - {to: light_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, light_core: 10}}
+  light_mythic:
+    name: "Quang Sứ"
+    element: LIGHT
+    rarity: MYTHIC
+    role: DPS
+    entity: VILLAGER
+    icon: VILLAGER_SPAWN_EGG
+    base: {hp: 80, atk: 19.5, def: 9.0, speed: 15}
+    growth: {hp: 6.67, atk: 1.62, def: 0.60, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  light_ancient:
+    name: "Quang Tinh Cổ Đại"
+    element: LIGHT
+    rarity: ANCIENT
+    role: DPS
+    entity: ALLAY
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+  nature_common:
+    name: "Huyền Quy"
+    element: NATURE
+    rarity: COMMON
+    role: HEALER
+    entity: TURTLE
+    icon: TURTLE_SPAWN_EGG
+    base: {hp: 33, atk: 3.2, def: 2.0, speed: 10}
+    growth: {hp: 2.75, atk: 0.27, def: 0.13, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: nature_uncommon, level: 10, star: 0, souls: 200, materials: {nature_core: 1}}
+  nature_uncommon:
+    name: "Trúc Linh"
+    element: NATURE
+    rarity: UNCOMMON
+    role: DPS
+    entity: PANDA
+    icon: PANDA_SPAWN_EGG
+    base: {hp: 36, atk: 7.5, def: 3.0, speed: 11}
+    growth: {hp: 3.00, atk: 0.62, def: 0.20, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: nature_rare, level: 18, star: 1, souls: 400, materials: {nature_core: 2}}
+  nature_rare:
+    name: "Thanh Oa"
+    element: NATURE
+    rarity: RARE
+    role: TANK
+    entity: FROG
+    icon: FROG_SPAWN_EGG
+    base: {hp: 66, atk: 4.2, def: 6.4, speed: 12}
+    growth: {hp: 5.50, atk: 0.35, def: 0.43, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+    evolutions:
+      - {to: nature_epic, level: 26, star: 2, souls: 600, materials: {nature_core: 3}}
+  nature_epic:
+    name: "Sa Lạc"
+    element: NATURE
+    rarity: EPIC
+    role: HEALER
+    entity: CAMEL
+    icon: CAMEL_SPAWN_EGG
+    base: {hp: 59, atk: 6.4, def: 5.0, speed: 13}
+    growth: {hp: 4.95, atk: 0.53, def: 0.33, speed: 0.1}
+    skills: [mend, sanctuary, vital_aura, vitality, power_up, swift]
+    evolutions:
+      - {to: nature_legendary, level: 34, star: 3, souls: 800, materials: {nature_core: 4}}
+  nature_legendary:
+    name: "Lâm Mã"
+    element: NATURE
+    rarity: LEGENDARY
+    role: DPS
+    entity: HORSE
+    icon: HORSE_SPAWN_EGG
+    base: {hp: 66, atk: 15.0, def: 7.0, speed: 14}
+    growth: {hp: 5.50, atk: 1.25, def: 0.47, speed: 0.1}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]
+    evolutions:
+      - {to: nature_mythic, level: 42, star: 3, souls: 1000, materials: {nature_core: 5}}
+      - {to: nature_ancient, level: 60, star: 3, souls: 5000, materials: {ancient_essence: 3, nature_core: 10}}
+  nature_mythic:
+    name: "Lâm Thố"
+    element: NATURE
+    rarity: MYTHIC
+    role: TANK
+    entity: RABBIT
+    icon: RABBIT_SPAWN_EGG
+    base: {hp: 120, atk: 9.1, def: 14.4, speed: 15}
+    growth: {hp: 10.00, atk: 0.76, def: 0.96, speed: 0.1}
+    skills: [guard, fortify, taunt_roar, vitality, power_up, swift]
+  nature_ancient:
+    name: "Huyền Quy Cổ Đại"
+    element: NATURE
+    rarity: ANCIENT
+    role: DPS
+    entity: TURTLE
+    icon: NETHER_STAR
+    base: {hp: 100, atk: 24, def: 10, speed: 18}
+    growth: {hp: 8, atk: 2, def: 0.7, speed: 0.15}
+    skills: [strike, blaze_burst, chain_bite, vitality, power_up, swift]

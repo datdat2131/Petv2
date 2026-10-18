@@ -1,0 +1,64 @@
+# ===== Astrax Pet RPG 2.0 =====
+storage:
+  type: SQLITE            # SQLITE (mặc định) hoặc MYSQL
+  sqlite-file: pets.db    # nằm trong plugins/AstraxPetRPG/
+  mysql: {host: localhost, port: 3306, database: astraxpet, user: root, password: "", use-ssl: false}
+  autosave-minutes: 5
+settings:
+  language: vi
+  starting-souls: 300
+  souls-per-kill: 5
+  xp-per-kill: 12
+  xp-share-inactive: 0.0      # tỉ lệ EXP cho pet không đi cùng (0 = tắt)
+  auto-summon-on-join: false
+  max-incubators: 3
+  shards-per-duplicate: 3
+  shards-per-star: 5
+  upgrade-souls-per-level: 50
+  starter-pet: fire_common     # pet tặng khi vào server lần đầu (để trống = không tặng)
+  starter-egg: basic
+effects:
+  rare-reveal-min: EPIC        # độ hiếm tối thiểu để có hiệu ứng pháo hoa/title
+  broadcast-min: LEGENDARY     # độ hiếm tối thiểu để thông báo toàn server
+combat:
+  enabled: true
+  tick-interval: 10            # tick giữa 2 lần AI chạy (10 = 0.5s)
+  max-pets-per-tick: 20        # ngân sách xử lý: tối đa pet mỗi lượt -> chống lag
+  search-range: 10.0
+  follow-distance: 3.0
+  teleport-distance: 16.0
+  max-targets-aoe: 4
+  protect-owner: true
+  command-cooldown-ms: 400     # chống spam lệnh
+  gui-click-cooldown-ms: 200   # chống spam click GUI
+  mob-elements:                # nguyên tố của quái vanilla (để tính khắc hệ)
+    BLAZE: FIRE
+    MAGMA_CUBE: FIRE
+    STRAY: ICE
+    ZOMBIE: DARK
+    SKELETON: DARK
+    ENDERMAN: DARK
+    CREEPER: LIGHTNING
+    SPIDER: NATURE
+buffs:
+  enabled: true                # pet đang triệu hồi cộng chỉ số cho chủ
+  hp-ratio: 0.25               # % HP pet cộng vào máu tối đa chủ
+  atk-ratio: 0.15
+  speed-ratio: 0.002
+  max-hp-bonus: 20.0
+  max-atk-bonus: 8.0
+  max-speed-bonus: 0.20
+drops:                          # nguyên liệu rơi khi diệt quái: material -> {chance, amount}
+  upgrade_stone: {chance: 0.08, amount: 1}
+  fire_core: {chance: 0.02, amount: 1}
+  ice_core: {chance: 0.02, amount: 1}
+  lightning_core: {chance: 0.02, amount: 1}
+  dark_core: {chance: 0.02, amount: 1}
+  light_core: {chance: 0.02, amount: 1}
+  nature_core: {chance: 0.02, amount: 1}
+  ancient_essence: {chance: 0.002, amount: 1}
+mythicmobs:
+  enabled: true                # tự dùng nếu MythicMobs được cài
+mythiclib:
+  enabled: true
+debug: false

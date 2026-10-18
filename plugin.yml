@@ -1,0 +1,38 @@
+name: AstraxPetRPG
+version: ${project.version}
+main: vn.soulpets.SoulPetsPlugin
+api-version: 1.21
+description: Astrax Pet RPG - pet, trứng, tiến hóa, kỹ năng, AI chiến đấu, GUI.
+author: Astrax
+softdepend: [PlaceholderAPI, MythicMobs, MythicLib]
+# Paper tự tải thư viện JDBC từ Maven Central ở lần chạy đầu (cần internet 1 lần)
+libraries:
+  - org.xerial:sqlite-jdbc:3.47.1.0
+  - com.mysql:mysql-connector-j:8.4.0
+commands:
+  pet:
+    description: Menu và lệnh pet của bạn.
+    usage: /pet [menu|collection|eggs|summon|dismiss|info|souls|skill|rename]
+    aliases: [pets, astraxpet]
+    permission: astraxpet.use
+  petadmin:
+    description: Quản trị Astrax Pet RPG.
+    usage: /petadmin <reload|debug|list|give|egg|gear|material|souls|xp>
+    permission: astraxpet.admin
+permissions:
+  astraxpet.use:
+    description: Dùng lệnh /pet và GUI.
+    default: true
+  astraxpet.admin:
+    description: Dùng /petadmin.
+    default: op
+  soulpets.use:
+    description: (Tương thích bản cũ) tương đương astraxpet.use.
+    default: true
+    children:
+      astraxpet.use: true
+  soulpets.admin:
+    description: (Tương thích bản cũ) tương đương astraxpet.admin.
+    default: op
+    children:
+      astraxpet.admin: true

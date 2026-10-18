@@ -1,0 +1,8 @@
+# Slot: WEAPON, ARMOR, CHARM. Mỗi cấp nâng +10% chỉ số của món đồ (tối đa max-upgrade).
+equipment:
+  fang_blade: {name: "Nanh Kiếm", slot: WEAPON, rarity: UNCOMMON, icon: IRON_SWORD, atk: 6, max-upgrade: 10}
+  dragon_claw: {name: "Long Trảo", slot: WEAPON, rarity: EPIC, icon: NETHERITE_SWORD, atk: 18, speed: 3, max-upgrade: 10}
+  scale_armor: {name: "Giáp Vảy", slot: ARMOR, rarity: UNCOMMON, icon: IRON_CHESTPLATE, def: 5, hp: 15, max-upgrade: 10}
+  aegis_plate: {name: "Thần Giáp", slot: ARMOR, rarity: LEGENDARY, icon: NETHERITE_CHESTPLATE, def: 20, hp: 60, max-upgrade: 10}
+  swift_charm: {name: "Bùa Tốc Hành", slot: CHARM, rarity: RARE, icon: FEATHER, speed: 8, max-upgrade: 10}
+  life_charm: {name: "Bùa Sinh Mệnh", slot: CHARM, rarity: RARE, icon: HEART_OF_THE_SEA, hp: 40, max-upgrade: 10}
