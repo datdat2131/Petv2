@@ -1,0 +1,11 @@
+# type: KILL_MOB | HATCH_EGG | USE_SKILL | WIN_DUNGEON | LEVEL_UP | EVOLVE
+# period: DAILY (reset 0h) | WEEKLY (reset thứ Hai). reward: souls, pet-exp, eggs {id: số lượng}, equipment [id]
+quests:
+  daily_kill:    {name: "Săn quái hằng ngày", type: KILL_MOB, amount: 30, period: DAILY, reward: {souls: 80, pet-exp: 100}}
+  daily_hatch:   {name: "Ấp một quả trứng", type: HATCH_EGG, amount: 1, period: DAILY, reward: {souls: 60, eggs: {basic_egg: 1}}}
+  daily_skill:   {name: "Dùng kỹ năng pet", type: USE_SKILL, amount: 10, period: DAILY, reward: {souls: 50, pet-exp: 80}}
+  daily_dungeon: {name: "Hoàn thành dungeon", type: WIN_DUNGEON, amount: 1, period: DAILY, reward: {souls: 150, pet-exp: 200}}
+  weekly_kill:    {name: "Thợ săn tuần", type: KILL_MOB, amount: 400, period: WEEKLY, reward: {souls: 600, eggs: {rare_egg: 1}}}
+  weekly_hatch:   {name: "Nhà ấp trứng", type: HATCH_EGG, amount: 10, period: WEEKLY, reward: {souls: 500, eggs: {rare_egg: 1}}}
+  weekly_dungeon: {name: "Chinh phục dungeon", type: WIN_DUNGEON, amount: 7, period: WEEKLY, reward: {souls: 1000, eggs: {mythic_egg: 1}}}
+  weekly_levelup: {name: "Huấn luyện viên", type: LEVEL_UP, amount: 10, period: WEEKLY, reward: {souls: 400, equipment: [iron_claw]}}

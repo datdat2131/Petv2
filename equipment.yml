@@ -1,8 +1,13 @@
-# Slot: WEAPON, ARMOR, CHARM. Mỗi cấp nâng +10% chỉ số của món đồ (tối đa max-upgrade).
+# slot: WEAPON | ARMOR | CHARM. shop-cost: giá Linh Hồn trong cửa hàng (0 = không bán).
+# upgrade-materials: nguyên liệu mỗi lần nâng cấp (nhân với cấp hiện tại + 1). upgrade-souls: Linh Hồn cơ bản mỗi lần nâng.
+# Mỗi cấp nâng cấp tăng 10% chỉ số của trang bị. max-upgrade: cấp nâng tối đa.
 equipment:
-  fang_blade: {name: "Nanh Kiếm", slot: WEAPON, rarity: UNCOMMON, icon: IRON_SWORD, atk: 6, max-upgrade: 10}
-  dragon_claw: {name: "Long Trảo", slot: WEAPON, rarity: EPIC, icon: NETHERITE_SWORD, atk: 18, speed: 3, max-upgrade: 10}
-  scale_armor: {name: "Giáp Vảy", slot: ARMOR, rarity: UNCOMMON, icon: IRON_CHESTPLATE, def: 5, hp: 15, max-upgrade: 10}
-  aegis_plate: {name: "Thần Giáp", slot: ARMOR, rarity: LEGENDARY, icon: NETHERITE_CHESTPLATE, def: 20, hp: 60, max-upgrade: 10}
-  swift_charm: {name: "Bùa Tốc Hành", slot: CHARM, rarity: RARE, icon: FEATHER, speed: 8, max-upgrade: 10}
-  life_charm: {name: "Bùa Sinh Mệnh", slot: CHARM, rarity: RARE, icon: HEART_OF_THE_SEA, hp: 40, max-upgrade: 10}
+  wooden_fang:   {name: "Nanh Gỗ", slot: WEAPON, rarity: COMMON, material: STICK, stats: {atk: 3}, shop-cost: 150, max-upgrade: 10, upgrade-souls: 40, upgrade-materials: {IRON_INGOT: 1}}
+  iron_claw:     {name: "Vuốt Sắt", slot: WEAPON, rarity: UNCOMMON, material: IRON_SWORD, stats: {atk: 8}, shop-cost: 600, max-upgrade: 10, upgrade-souls: 80, upgrade-materials: {IRON_INGOT: 2}}
+  diamond_fang:  {name: "Nanh Kim Cương", slot: WEAPON, rarity: EPIC, material: DIAMOND_SWORD, stats: {atk: 18, speed: 0.05}, shop-cost: 0, max-upgrade: 10, upgrade-souls: 200, upgrade-materials: {DIAMOND: 1}}
+  leather_vest:  {name: "Áo Da", slot: ARMOR, rarity: COMMON, material: LEATHER_CHESTPLATE, stats: {hp: 10, def: 2}, shop-cost: 150, max-upgrade: 10, upgrade-souls: 40, upgrade-materials: {LEATHER: 4}}
+  iron_plate:    {name: "Giáp Sắt", slot: ARMOR, rarity: UNCOMMON, material: IRON_CHESTPLATE, stats: {hp: 25, def: 6}, shop-cost: 600, max-upgrade: 10, upgrade-souls: 80, upgrade-materials: {IRON_INGOT: 3}}
+  netherite_mail: {name: "Giáp Netherite", slot: ARMOR, rarity: LEGENDARY, material: NETHERITE_CHESTPLATE, stats: {hp: 70, def: 16}, shop-cost: 0, max-upgrade: 10, upgrade-souls: 400, upgrade-materials: {NETHERITE_SCRAP: 1}}
+  lucky_charm:   {name: "Bùa May Mắn", slot: CHARM, rarity: COMMON, material: RABBIT_FOOT, stats: {speed: 0.05, hp: 5}, shop-cost: 200, max-upgrade: 10, upgrade-souls: 50, upgrade-materials: {GOLD_INGOT: 2}}
+  emerald_charm: {name: "Bùa Ngọc Lục Bảo", slot: CHARM, rarity: RARE, material: EMERALD, stats: {atk: 4, def: 3, hp: 15}, shop-cost: 900, max-upgrade: 10, upgrade-souls: 120, upgrade-materials: {EMERALD: 2}}
+  star_charm:    {name: "Bùa Sao Băng", slot: CHARM, rarity: MYTHIC, material: NETHER_STAR, stats: {atk: 12, def: 8, hp: 50, speed: 0.1}, shop-cost: 0, max-upgrade: 10, upgrade-souls: 600, upgrade-materials: {AMETHYST_SHARD: 8}}

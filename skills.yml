@@ -1,15 +1,23 @@
-# type: ACTIVE|PASSIVE ; effect: DAMAGE AOE HEAL SHIELD SLOW BURN SPEED | STAT_HP STAT_ATK STAT_DEF STAT_SPEED
-# power: hệ số (active) hoặc +% mỗi cấp (passive). mythic-skill: tên skill MythicMobs tùy chọn (cần MythicMobs).
+# type: ACTIVE | PASSIVE
+# effect ACTIVE: DAMAGE_AOE, DAMAGE_SINGLE, CHAIN, HEAL, SHIELD, BUFF
+# effect PASSIVE: HP_PCT, ATK_PCT, DEF_PCT, SPEED_PCT, CRIT, LIFESTEAL, REGEN, REDUCTION
+# Giá trị ở cấp L = power + per-level*(L-1). unlock-level: cấp pet mở khóa (tự có cấp 1). cost: điểm kỹ năng để nâng 1 cấp.
+# extra: DAMAGE_AOE/SINGLE=giây hiệu ứng (cháy/chậm) hoặc tỉ lệ hút máu; SHIELD/BUFF=thời gian (giây).
+# mythic-skill: (tuỳ chọn) tên skill MythicMobs sẽ được cast từ pet khi dùng skill này.
 skills:
-  strike:      {name: "Đòn Đánh", type: ACTIVE, effect: DAMAGE, power: 1.2, cooldown: 4, max-level: 5}
-  blaze_burst: {name: "Bùng Nổ", type: ACTIVE, effect: AOE, power: 0.9, cooldown: 10, max-level: 5}
-  chain_bite:  {name: "Cắn Xé", type: ACTIVE, effect: BURN, power: 1.0, cooldown: 7, max-level: 5}
-  guard:       {name: "Hộ Thể", type: ACTIVE, effect: SHIELD, power: 1.0, cooldown: 12, max-level: 5}
-  fortify:     {name: "Kiên Cố", type: ACTIVE, effect: SHIELD, power: 1.5, cooldown: 20, max-level: 5}
-  taunt_roar:  {name: "Gầm Khiêu Khích", type: ACTIVE, effect: SLOW, power: 1.0, cooldown: 15, max-level: 5}
-  mend:        {name: "Chữa Trị", type: ACTIVE, effect: HEAL, power: 0.8, cooldown: 6, max-level: 5}
-  sanctuary:   {name: "Thánh Địa", type: ACTIVE, effect: HEAL, power: 1.6, cooldown: 25, max-level: 5}
-  vital_aura:  {name: "Sinh Khí", type: ACTIVE, effect: SPEED, power: 1.0, cooldown: 18, max-level: 5}
-  vitality:    {name: "Sinh Lực", type: PASSIVE, effect: STAT_HP, power: 0.04, max-level: 5}
-  power_up:    {name: "Cuồng Nộ", type: PASSIVE, effect: STAT_ATK, power: 0.04, max-level: 5}
-  swift:       {name: "Nhanh Nhẹn", type: PASSIVE, effect: STAT_SPEED, power: 0.03, max-level: 5}
+  ember_burst:     {name: "Bùng Cháy", type: ACTIVE, effect: DAMAGE_AOE, element: FIRE, power: 1.2, per-level: 0.15, cooldown: 10, range: 5, unlock-level: 1, max-level: 5, cost: 1, particle: FLAME, extra: 3, mythic-skill: "", description: "Nổ lửa diện rộng, thiêu đốt kẻ địch."}
+  frost_nova:      {name: "Băng Nổ", type: ACTIVE, effect: DAMAGE_AOE, element: ICE, power: 1.0, per-level: 0.15, cooldown: 11, range: 5, unlock-level: 1, max-level: 5, cost: 1, particle: SNOWFLAKE, extra: 4, mythic-skill: "", description: "Đóng băng diện rộng, làm chậm kẻ địch."}
+  chain_lightning: {name: "Sét Lan", type: ACTIVE, effect: CHAIN, element: LIGHTNING, power: 1.1, per-level: 0.12, cooldown: 9, range: 8, unlock-level: 1, max-level: 5, cost: 1, particle: ELECTRIC_SPARK, extra: 4, mythic-skill: "", description: "Tia sét nhảy qua tối đa 4 mục tiêu."}
+  shadow_drain:    {name: "Hút Bóng Tối", type: ACTIVE, effect: DAMAGE_SINGLE, element: DARK, power: 1.8, per-level: 0.2, cooldown: 8, range: 7, unlock-level: 1, max-level: 5, cost: 1, particle: SMOKE, extra: 0.35, mythic-skill: "", description: "Gây sát thương lớn và hút máu cho chủ."}
+  holy_light:      {name: "Ánh Sáng Thánh", type: ACTIVE, effect: HEAL, element: LIGHT, power: 0.25, per-level: 0.04, cooldown: 12, range: 8, unlock-level: 1, max-level: 5, cost: 1, particle: HEART, extra: 0, mythic-skill: "", description: "Hồi máu cho chủ theo % máu tối đa."}
+  nature_embrace:  {name: "Vòng Tay Thiên Nhiên", type: ACTIVE, effect: HEAL, element: NATURE, power: 0.2, per-level: 0.04, cooldown: 12, range: 8, unlock-level: 1, max-level: 5, cost: 1, particle: HAPPY_VILLAGER, extra: 0, mythic-skill: "", description: "Hồi máu và tạo sinh lực cho chủ."}
+  rally_roar:      {name: "Tiếng Gầm Cổ Vũ", type: ACTIVE, effect: BUFF, power: 0, per-level: 0, cooldown: 20, range: 8, unlock-level: 10, max-level: 5, cost: 1, particle: CRIT, extra: 8, mythic-skill: "", description: "Tăng sức mạnh và tốc độ cho chủ."}
+  guardian_shield: {name: "Khiên Hộ Vệ", type: ACTIVE, effect: SHIELD, element: LIGHT, power: 0.2, per-level: 0.04, cooldown: 18, range: 8, unlock-level: 10, max-level: 5, cost: 1, particle: END_ROD, extra: 8, mythic-skill: "", description: "Tạo khiên hấp thụ sát thương cho chủ."}
+  vitality:        {name: "Sinh Lực", type: PASSIVE, effect: HP_PCT, power: 0.05, per-level: 0.02, unlock-level: 5, max-level: 5, cost: 1, description: "Tăng % HP của pet."}
+  ferocity:        {name: "Hung Tính", type: PASSIVE, effect: ATK_PCT, power: 0.05, per-level: 0.025, unlock-level: 5, max-level: 5, cost: 1, description: "Tăng % ATK của pet."}
+  iron_hide:       {name: "Da Sắt", type: PASSIVE, effect: DEF_PCT, power: 0.06, per-level: 0.03, unlock-level: 5, max-level: 5, cost: 1, description: "Tăng % DEF của pet."}
+  swiftness:       {name: "Nhanh Nhẹn", type: PASSIVE, effect: SPEED_PCT, power: 0.04, per-level: 0.02, unlock-level: 10, max-level: 5, cost: 1, description: "Tăng % tốc độ pet."}
+  critical_eye:    {name: "Nhãn Chí Mạng", type: PASSIVE, effect: CRIT, power: 0.05, per-level: 0.02, unlock-level: 15, max-level: 5, cost: 1, description: "Tăng tỉ lệ chí mạng."}
+  vampiric:        {name: "Khát Máu", type: PASSIVE, effect: LIFESTEAL, power: 0.03, per-level: 0.015, unlock-level: 15, max-level: 5, cost: 1, description: "Hút máu cho chủ theo sát thương pet gây ra."}
+  regeneration:    {name: "Hồi Phục", type: PASSIVE, effect: REGEN, power: 0.5, per-level: 0.25, unlock-level: 5, max-level: 5, cost: 1, description: "Hồi máu cho chủ mỗi 2 giây (HP)."}
+  guardian_aura:   {name: "Hào Quang Hộ Vệ", type: PASSIVE, effect: REDUCTION, power: 0.03, per-level: 0.01, unlock-level: 20, max-level: 5, cost: 1, description: "Giảm sát thương chủ nhận vào."}

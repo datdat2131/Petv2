@@ -8,6 +8,7 @@
  <properties>
   <maven.compiler.release>21</maven.compiler.release>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <junit.version>5.10.2</junit.version>
  </properties>
  <repositories>
   <repository><id>papermc</id><url>https://repo.papermc.io/repository/maven-public/</url></repository>
@@ -16,21 +17,44 @@
  <dependencies>
   <dependency><groupId>io.papermc.paper</groupId><artifactId>paper-api</artifactId><version>1.21.4-R0.1-SNAPSHOT</version><scope>provided</scope></dependency>
   <dependency><groupId>me.clip</groupId><artifactId>placeholderapi</artifactId><version>2.11.6</version><scope>provided</scope></dependency>
-  <!-- JDBC driver được Paper tải qua mục "libraries" trong plugin.yml; chỉ cần scope test để chạy unit test -->
-  <dependency><groupId>org.xerial</groupId><artifactId>sqlite-jdbc</artifactId><version>3.47.1.0</version><scope>test</scope></dependency>
-  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.11.3</version><scope>test</scope></dependency>
+  <dependency><groupId>org.xerial</groupId><artifactId>sqlite-jdbc</artifactId><version>3.47.1.0</version></dependency>
+  <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>${junit.version}</version><scope>test</scope></dependency>
  </dependencies>
  <build>
   <finalName>AstraxPetRPG-${project.version}</finalName>
-  <!-- Bố cục Maven chuẩn: src/main/java, src/main/resources/plugin.yml -->
+  <!-- Bố cục phẳng: file Java và YAML nằm ngay thư mục gốc. -->
+  <sourceDirectory>${project.basedir}</sourceDirectory>
+  <testSourceDirectory>${project.basedir}</testSourceDirectory>
   <resources>
-   <resource><directory>src/main/resources</directory><filtering>true</filtering><includes><include>plugin.yml</include></includes></resource>
-   <resource><directory>src/main/resources</directory><filtering>false</filtering><excludes><exclude>plugin.yml</exclude></excludes></resource>
+   <resource><directory>${project.basedir}</directory><filtering>false</filtering>
+    <includes>
+     <include>plugin.yml</include><include>config.yml</include><include>pets.yml</include>
+     <include>skills.yml</include><include>eggs.yml</include><include>equipment.yml</include>
+     <include>quests.yml</include><include>dungeons.yml</include><include>achievements.yml</include>
+    </includes>
+   </resource>
   </resources>
   <plugins>
-   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.0</version><configuration><release>21</release></configuration></plugin>
-   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.2</version></plugin>
-   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version></plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId><version>3.5.0</version>
+    <executions><execution><id>check-flat-files</id><phase>validate</phase><goals><goal>enforce</goal></goals>
+     <configuration><rules><requireFilesExist>
+      <message>THIEU FILE: hay upload cac file Java/YAML va pom.xml vao thu muc goc repository.</message>
+      <files><file>${project.basedir}/plugin.yml</file><file>${project.basedir}/config.yml</file><file>${project.basedir}/SoulPetsPlugin.java</file></files>
+     </requireFilesExist></rules></configuration>
+    </execution></executions>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.0</version>
+    <configuration><release>21</release><excludes><exclude>**/*Test.java</exclude><exclude>target/**</exclude></excludes><testIncludes><testInclude>*Test.java</testInclude></testIncludes></configuration>
+   </plugin>
+   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version></plugin>
+   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version>
+    <executions><execution><phase>package</phase><goals><goal>shade</goal></goals>
+     <configuration><createDependencyReducedPom>false</createDependencyReducedPom>
+      <filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.RSA</exclude></excludes></filter></filters>
+     </configuration></execution></executions>
+   </plugin>
   </plugins>
  </build>
 </project>

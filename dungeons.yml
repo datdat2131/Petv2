@@ -1,0 +1,35 @@
+# Dungeon dạng đấu trường: mob xuất hiện quanh 'location' (đặt bằng /petadmin setdungeon <id>), nếu chưa đặt sẽ dùng vị trí người chơi.
+# waves: danh sách đợt. type = EntityType, hoặc mythic = tên mob MythicMobs (cần MythicMobs). boss: đợt cuối.
+dungeons:
+  forest_ruins:
+    name: "Tàn Tích Rừng Sâu"
+    min-pet-level: 5
+    cooldown-seconds: 600
+    timeout-seconds: 300
+    teleport: true
+    waves:
+      - {type: ZOMBIE, count: 6, hp-mult: 1.0}
+      - {type: SKELETON, count: 6, hp-mult: 1.2}
+    boss: {type: WITHER_SKELETON, name: "&4Vua Xác Chết", hp: 200, mythic: ""}
+    rewards: {souls: 300, pet-exp: 400, eggs: {basic_egg: 1}, equipment: []}
+  frost_crypt:
+    name: "Hầm Mộ Băng Giá"
+    min-pet-level: 20
+    cooldown-seconds: 900
+    timeout-seconds: 420
+    teleport: true
+    waves:
+      - {type: STRAY, count: 8, hp-mult: 1.5}
+      - {type: STRAY, count: 10, hp-mult: 2.0}
+    boss: {type: STRAY, name: "&bHàn Băng Vương", hp: 450, mythic: ""}
+    rewards: {souls: 900, pet-exp: 1200, eggs: {rare_egg: 1}, equipment: [iron_plate]}
+  # Ví dụ dùng MythicMobs (bật khi đã có mob "SkeletonKing" trong MythicMobs):
+  # mythic_arena:
+  #   name: "Đấu Trường Mythic"
+  #   min-pet-level: 40
+  #   cooldown-seconds: 1800
+  #   timeout-seconds: 600
+  #   waves:
+  #     - {mythic: SkeletalKnight, count: 5, hp-mult: 1.0}
+  #   boss: {mythic: SkeletonKing, name: "&6Skeleton King", hp: 0}
+  #   rewards: {souls: 2000, pet-exp: 3000, eggs: {mythic_egg: 1}}

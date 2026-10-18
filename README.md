@@ -1,70 +1,77 @@
 # Astrax Pet RPG 2.0
 
-Plugin pet RPG cho **Paper 1.21.4 / Java 21**. Nâng cấp từ bản 1.2.0 (giữ main class `vn.soulpets.SoulPetsPlugin`, lệnh `/pet`, `/petadmin`, quyền `soulpets.*` vẫn hoạt động).
+Plugin pet RPG cho **Paper 1.21.4** (Java 21): 54 pet 6 hệ nguyên tố, 7 độ hiếm, trứng + ấp + pity, level/EXP/chỉ số, kỹ năng chủ động & bị động,
+tiến hóa nhiều nhánh, nâng sao, trang bị, AI chiến đấu (Tank/Healer/DPS), dungeon + boss, nhiệm vụ ngày/tuần, thành tựu, PetDex, bảng xếp hạng,
+GUI phân trang, PlaceholderAPI, SQLite/MySQL.
 
-## Tính năng
-| Hệ thống | Mô tả |
+> **Trạng thái kiểm thử (trung thực):** toàn bộ logic thuần (gacha/pity, EXP, chỉ số, khắc hệ, tiến hóa, nhiệm vụ, mã hóa dữ liệu, chọn mục tiêu, cooldown...)
+> đã được biên dịch và chạy test thật. Phần gọi Bukkit/Paper (AI pet, GUI, lệnh, dungeon, SQL) được viết theo Paper API 1.21.4 nhưng **chưa chạy trên server thật** —
+> hãy thử trên server test trước khi đưa lên server chính (xem mục *Debug*).
+
+## 1. Cài đặt
+1. Yêu cầu: Java 21, Paper 1.21.4. (Tùy chọn: PlaceholderAPI, MythicMobs, MythicLib.)
+2. Build: `mvn clean package` → `target/AstraxPetRPG-2.0.0.jar` (Maven tự chạy unit test).
+3. Kiểm tra JAR: `sh tools/verify-jar.sh target/AstraxPetRPG-2.0.0.jar` (xác nhận `plugin.yml` ở root, class main, các module và file config).
+4. Chép JAR vào `plugins/`, khởi động server. Lần đầu Paper sẽ tải driver SQLite/MySQL (khai báo `libraries:` trong plugin.yml) nên cần mạng.
+5. Các file cấu hình được tạo trong `plugins/AstraxPetRPG/`: `config.yml, pets.yml, skills.yml, eggs.yml, equipment.yml, quests.yml, achievements.yml, dungeons.yml`.
+
+## 2. Lệnh
+| Lệnh | Tác dụng |
 |---|---|
-| Pet | 42 pet mẫu (6 hệ x 6 độ hiếm + 6 Ancient), thêm không giới hạn trong `pets.yml`. Hệ: Lửa, Băng, Sét, Bóng tối, Ánh sáng, Thiên nhiên (có bảng khắc hệ). |
-| Độ hiếm | Common, Uncommon, Rare, Epic, Legendary, Mythic, Ancient |
-| Trứng | `eggs.yml`: giá, thời gian ấp, tỉ lệ rơi, lọc hệ, **pity** theo từng độ hiếm. Lò ấp lưu theo thời điểm thật (an toàn khi restart/offline). Pet trùng -> mảnh (shard) để nâng sao. Hiệu ứng title/pháo hoa/âm thanh, broadcast cho độ hiếm cao. |
-| Chỉ số | Level, EXP, HP/ATK/DEF/SPEED, điểm kỹ năng (+1 mỗi cấp), kỹ năng chủ động và bị động |
-| Tiến hóa / Sao / Trang bị | Nhiều nhánh tiến hóa (cấp, sao, Linh Hồn, nguyên liệu); nâng sao tối đa 5 bằng mảnh; 3 slot trang bị, nâng cấp bằng `upgrade_stone` + Linh Hồn |
-| AI chiến đấu | Tank / Healer / DPS, bảo vệ chủ (ưu tiên quái đang đánh chủ), chọn mục tiêu thông minh, cooldown, chống spam, ngân sách xử lý chống lag |
-| GUI | Menu chính, bộ sưu tập phân trang, chi tiết pet, trứng/lò ấp, chọn trang bị, **xác nhận** các hành động quan trọng |
-| Lưu trữ | SQLite mặc định, MySQL tùy chọn; ghi bất đồng bộ bằng transaction; xử lý người chơi offline |
-| Hook | PlaceholderAPI, MythicMobs (reflection), MythicLib (reflection, thử nghiệm) |
+| `/pet` / `/pet menu` | Menu chính |
+| `/pet summon` · `/pet dismiss` | Triệu hồi / thu hồi pet đang chọn |
+| `/pet stats` | Chỉ số chi tiết |
+| `/pet skill` [`list`/`cast <id>`/`upgrade <id>`] | Menu kỹ năng / dùng kỹ năng / nâng cấp |
+| `/pet evolve [nhánh]` | Tiến hóa (menu nếu không ghi nhánh) |
+| `/pet equip` [`hand`/`upgrade <ô>`/`unequip <ô>`] | Trang bị (ô: WEAPON, ARMOR, CHARM) |
+| `/pet egg` · `/pet gacha [trứng]` | Trứng & lò ấp · mở trứng ngay (tốn gấp `instant-hatch-cost-multiplier`) |
+| `/pet dex` · `/pet quests` · `/pet top` | PetDex · nhiệm vụ · xếp hạng |
+| `/pet dungeon [start <id>/leave]` | Dungeon |
+| `/pet rename <tên>` · `/pet release [confirm]` · `/pet select <số>` | Đổi tên · thả pet · chọn pet |
+| `/petadmin give pet\|egg\|souls\|exp\|equip\|shards <người> <id/số> [n]` | Tặng (người offline vẫn được, trừ exp/equip) |
+| `/petadmin set level <người> <cấp>` · `reset <người> confirm` · `info <người>` | Quản trị |
+| `/petadmin reload` · `save` · `list` · `setdungeon <id>` · `dungeon stop <người>` · `debug [on/off/dump]` | Vận hành |
 
-## Cài đặt
-1. Cần Paper 1.21.4, Java 21.
-2. Build: `mvn clean package` -> `target/AstraxPetRPG-2.0.0.jar`. Kiểm tra JAR: `./scripts_verify_jar.sh`.
-3. Chép JAR vào `plugins/`, khởi động server. **Lần đầu server cần internet** để Paper tải `sqlite-jdbc` và `mysql-connector-j` (khai báo `libraries:` trong plugin.yml).
-4. Chỉnh `plugins/AstraxPetRPG/*.yml`, rồi `/petadmin reload`.
+Quyền: `soulpets.use` (mặc định true), `soulpets.dungeon` (true), `soulpets.admin` (op).
+Click chuột phải vào pet đang triệu hồi để mở menu.
 
-## Lệnh và quyền
-- `/pet` (menu), `/pet collection|eggs|summon|dismiss|info|souls|skill [id]|rename <tên>` - quyền `astraxpet.use` (mặc định true)
-- `/petadmin reload|debug|list|give <p> <petId>|egg <p> <eggId> <n>|gear <p> <id> <n>|material <p> <id> <n>|souls <p> <n>|xp <p> <n>` - quyền `astraxpet.admin`
-- Chuột phải vào pet của mình để mở menu.
-- Người chơi offline: admin vẫn cấp được (đọc-sửa-ghi tuần tự trên thread IO), tên phải nằm trong cache server.
+## 3. Thêm nội dung (không giới hạn)
+* **Pet mới**: thêm khối vào `pets.yml` (id, name, element, rarity, role, entity, stats, skills, evolutions), rồi `/petadmin reload`. Plugin cảnh báo trong console nếu skill/nhánh tiến hóa sai id.
+  `obtainable: false` = chỉ có qua tiến hóa. Pet mới tự vào pool trứng theo độ hiếm (và hệ cho trứng nguyên tố).
+* **Kỹ năng**: `skills.yml` (hiệu ứng ACTIVE: `DAMAGE_AOE, DAMAGE_SINGLE, CHAIN, HEAL, SHIELD, BUFF`; PASSIVE: `HP_PCT, ATK_PCT, DEF_PCT, SPEED_PCT, CRIT, LIFESTEAL, REGEN, REDUCTION`).
+* **Trứng**: `eggs.yml` (tỉ lệ `weights` tùy ý, lọc `element`). **Pity** + **tỉ lệ rơi trứng từ quái**: `config.yml` → `egg.pity`, `egg.drops`.
+* **Trang bị / nhiệm vụ / thành tựu / dungeon**: `equipment.yml`, `quests.yml`, `achievements.yml`, `dungeons.yml`.
 
-## Cấu hình
-- `config.yml`: database, kinh tế, hiệu ứng, chiến đấu, buff, tỉ lệ rơi nguyên liệu, hook.
-- `pets.yml`: mỗi pet: `name, element, rarity, role, entity, icon, base/growth{hp,atk,def,speed}, skills, evolutions, mythic-mob`. Có thể sinh lại danh sách mẫu bằng `python3 tools/gen_pets.py`.
-- `skills.yml`, `eggs.yml`, `equipment.yml`: xem chú thích đầu mỗi file.
-- Công thức chỉ số: `(base + growth*(lv-1)) * hệ số độ hiếm * (1 + 0.1*sao) + trang bị`, rồi nhân % kỹ năng bị động.
-- Pity: `pity: {EPIC: 50}` nghĩa là sau 49 lần ấp không ra Epic+ thì lần thứ 50 chắc chắn ra Epic+ (bộ đếm lưu trong DB).
+## 4. Cơ chế chính
+* **Độ hiếm**: Common → Uncommon → Rare → Epic → Legendary → Mythic → Ancient (hệ số chỉ số 1.0 … 3.4).
+* **Hệ**: Lửa > Băng > Sét > Thiên nhiên > Lửa (x1.3 / x0.8); Ánh sáng ↔ Bóng tối khắc nhau (x1.3). Quái vanilla được gán hệ trong `MobElements`.
+* **Pity**: chắc chắn ≥ Epic sau 10 lần, tỉ lệ Legendary+ tăng từ lần 60, chắc chắn ≥ Legendary ở lần 90 (đổi trong config). Trứng không có Epic+ không tính pity.
+* **Trùng pet**: đổi thành *mảnh* (dùng nâng sao: 5/10/15/20/25 mảnh) + EXP.
+* **Tiến hóa**: mỗi pet gốc có 2 nhánh (Vương = sát thương, Thần = phòng thủ/hỗ trợ), cần cấp, Linh Hồn, nguyên liệu trong túi; tăng cấp tối đa +25 và +20% chỉ số, +2 điểm kỹ năng.
+* **AI**: một task duy nhất cho mọi pet (mặc định 0.5s). Ưu tiên kẻ đang đánh chủ → boss → máu thấp (DPS) → gần. Tank kéo aggro (tối đa 3 quái), Healer tự hồi máu khi chủ <65% máu, DPS dùng kỹ năng sát thương. Có sticky-target, giới hạn quét, ngân sách hiệu ứng, cooldown kỹ năng, chống spam lệnh/click.
+* **Chống lag / lỗi thực thể**: pet `persistent=false` (không lưu vào chunk), có PDC đánh dấu; tự hồi sinh khi chunk unload (giới hạn số lần), xóa pet mồ côi khi chunk load / khởi động / tắt plugin; buff thuộc tính của chủ luôn được gỡ khi thoát/tắt.
+* **Dữ liệu an toàn**: lưu nguyên tử trong transaction (SQLite WAL + synchronous=FULL), ghi qua một luồng IO duy nhất bằng snapshot, thử lại 3 lần, lưu đồng bộ khi tắt server, đọc lại sau khi ghi xong (không đọc dữ liệu cũ khi vào lại nhanh). **Tải lỗi ⇒ từ chối đăng nhập** thay vì tạo hồ sơ trống ghi đè. Người offline được sửa qua `/petadmin`.
+* **Kill từ spawner** không cho Linh Hồn/EXP/trứng (`combat.ignore-spawner-mobs`).
 
-## PlaceholderAPI
-`%astraxpet_souls%`, `%astraxpet_count%`, `%astraxpet_active_name%`, `_level`, `_rarity`, `_element`, `_role`, `_star`, `_hp`, `_atk`, `_def`, `_speed`.
+## 5. MySQL
+`config.yml`: `database.type: mysql` và điền `database.mysql.*`. Bảng `astrax_profiles` được tạo tự động. Chuyển từ SQLite sang MySQL: dừng server, đổi type (dữ liệu SQLite không tự chuyển).
 
-## MythicMobs
-- Ví dụ: `src/main/resources/mythicmobs/example-pet-mob.yml` và `example-pet-skills.yml` (chép vào thư mục tương ứng của MythicMobs).
-- Dùng mob Mythic làm hình dạng pet: thêm `mythic-mob: AstraxEmberDrake` vào pet trong `pets.yml`.
-- Hiệu ứng skill Mythic: thêm `mythic-skill: AstraxFlameBurst` vào skill trong `skills.yml`. Sát thương do plugin tính; Mythic chỉ chạy hiệu ứng.
-- Nếu API Mythic khác phiên bản, plugin ghi cảnh báo và tự dùng entity vanilla.
+## 6. PlaceholderAPI
+`%astrax_souls%`, `%astrax_pets%`, `%astrax_dex%`, `%astrax_dex_total%`, `%astrax_score%`, `%astrax_pet_name%`, `%astrax_pet_level%`, `%astrax_pet_rarity%`, `%astrax_pet_element%`, `%astrax_pet_role%`, `%astrax_pet_power%`, `%astrax_pet_star%`.
 
-## MythicLib
-Nếu có MythicLib, buff ATK/DEF/HP của pet cộng vào stat MythicLib (`ATTACK_DAMAGE`, `DEFENSE`, `MAX_HEALTH`) thay vì attribute vanilla. Tính năng thử nghiệm qua reflection; lỗi sẽ tự tắt (xem log). Tắt bằng `mythiclib.enabled: false`.
+## 7. MythicMobs / MythicLib
+* **MythicMobs** (reflection, không bắt buộc): `mythic-mob` trong `pets.yml` (hình dạng pet), `mythic` trong `dungeons.yml` (quái/boss), `mythic-skill` trong `skills.yml` (cast skill Mythic khi pet dùng kỹ năng). Ví dụ trong `examples/mythicmobs/`.
+* **MythicLib** (thử nghiệm): đọc chỉ số tùy chỉnh `ASTRAX_PET_DAMAGE` (đơn vị %) của chủ và nhân vào sát thương pet. Lỗi/thiếu chỉ số ⇒ bỏ qua.
+  Tắt từng hook bằng `hooks.*` trong `config.yml`.
 
-## Thiết kế chống lỗi
-- **Một task AI duy nhất**, round-robin, tối đa `combat.max-pets-per-tick` pet mỗi lượt; hủy khi `onDisable`/reload (không trùng task).
-- **Mỗi chủ tối đa 1 entity**: `PetManager` hủy entity cũ trước khi spawn; pet `setPersistent(false)`, bị dọn khi quit, chunk unload (`EntitiesUnloadEvent`), `EntitiesLoadEvent` và lúc bật plugin.
-- Pet không bao giờ tự đánh (mọi sát thương vanilla từ pet bị hủy); sát thương do AI plugin tính -> kiểm soát được.
-- Các map theo người chơi/pet (cooldown, rate limiter, threat) được dọn khi quit/thu hồi; `RateLimiter.purge` chạy định kỳ.
-- **Không mất dữ liệu**: nạp dữ liệu ở `AsyncPlayerPreLoginEvent`, nếu lỗi đọc thì từ chối vào server (không tạo profile rỗng đè lên dữ liệu cũ); ghi bằng bản snapshot, transaction, một thread IO tuần tự; `onDisable` chờ ghi xong; ghi lỗi sẽ đánh dấu dirty để autosave thử lại.
+## 8. Debug
+1. `/petadmin debug on` — log chi tiết (tải hồ sơ, spawn pet, dùng kỹ năng). `/petadmin debug dump` — liệt kê pet đang hoạt động, entity còn hợp lệ, mục tiêu.
+2. Pet không xuất hiện: kiểm tra console có cảnh báo `EntityType không hợp lệ` / `cần entity dạng Mob`; thử `entity: WOLF`.
+3. Pet lag: tăng `combat.think-interval-ticks`, giảm `combat.max-scan-entities`, `combat.max-effects-per-tick`.
+4. Không kết nối DB: plugin tự tắt để bảo vệ dữ liệu; xem lỗi đầu tiên trong console (driver / quyền / đường dẫn).
+5. Mất dữ liệu nghi ngờ: tìm dòng `KHÔNG LƯU ĐƯỢC hồ sơ` trong log (có kèm dữ liệu thô để khôi phục).
+6. Test: `mvn test`. JAR: `sh tools/verify-jar.sh`.
 
-## Debug
-- `debug: true` trong `config.yml` để log cast kỹ năng.
-- `/petadmin debug`: số pet đang hoạt động, số pet và thời gian AI lượt trước, trạng thái hook.
-- Pet không xuất hiện: kiểm tra `entity:` trong `pets.yml` là `EntityType` hợp lệ; log sẽ báo "Không spawn được ...".
-- "Dữ liệu pet đang lỗi" khi vào server: xem log `SEVERE` của `AstraxPetRPG` (DB không mở được / MySQL sai thông tin).
-- Mob thù địch (Warden, Enderman...) dùng làm pet chỉ là hình dạng: vô hại, không tự nhắm mục tiêu, không phá block.
-
-## Unit test
-`mvn test` chạy JUnit 5: `CoreSystemsTest` (rarity, khắc hệ, pity, ấp trứng, level/kỹ năng, chỉ số, tiến hóa nhiều nhánh, nâng sao, trang bị, chọn mục tiêu, cooldown/chống spam, deep copy) và `SqlStorageTest` (SQLite round-trip, offline modify).
-
-## Cấu trúc
-`vn.soulpets.{pet, rarity, egg, evolution, combat, skills, equipment, mythicmobs, mythiclib, storage, gui, commands, config, hook}`; `plugin.yml` ở `src/main/resources/plugin.yml`.
-
-## Di chuyển từ 1.2.0
-Dữ liệu cũ (`pets.db`, bảng `pet_players/pet_collection`) **không** được tự động chuyển sang schema mới (`ap_*`). Pet cũ theo loại vanilla không còn tương ứng 1-1; cần script chuyển nếu muốn giữ.
+## 9. Cấu trúc mã
+`pet` (mô hình, PetManager/PetService), `rarity`, `egg` (gacha/pity/ấp), `evolution`, `combat` (chọn mục tiêu, sát thương, cooldown, listener), `skills`, `equipment`, `quest`, `reward`, `dungeon`,
+`mythicmobs`, `mythiclib`, `storage` (SQL, ProfileManager, Codec), `gui`, `commands`, `config`, `placeholder`, `util`.

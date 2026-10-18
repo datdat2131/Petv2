@@ -1,0 +1,15 @@
+# counter: kills | hatches | evolutions | dungeons | levelups | skills | legendary_pulls | dex (số pet đã khám phá) | stars
+achievements:
+  hunter_1:   {name: "Thợ săn tập sự", counter: kills, threshold: 100, reward: {souls: 100}, description: "Hạ 100 quái."}
+  hunter_2:   {name: "Thợ săn lão luyện", counter: kills, threshold: 1000, reward: {souls: 500, eggs: {rare_egg: 1}}, description: "Hạ 1000 quái."}
+  hunter_3:   {name: "Huyền thoại săn quái", counter: kills, threshold: 10000, reward: {souls: 3000, eggs: {mythic_egg: 1}}, description: "Hạ 10000 quái."}
+  hatcher_1:  {name: "Người ấp trứng", counter: hatches, threshold: 1, reward: {souls: 50}, description: "Ấp quả trứng đầu tiên."}
+  hatcher_2:  {name: "Trại trứng", counter: hatches, threshold: 50, reward: {souls: 600, eggs: {rare_egg: 2}}, description: "Ấp 50 trứng."}
+  lucky:      {name: "Vận may", counter: legendary_pulls, threshold: 1, reward: {souls: 500}, description: "Nhận pet Legendary trở lên."}
+  evolver_1:  {name: "Bước tiến hóa", counter: evolutions, threshold: 1, reward: {souls: 200}, description: "Tiến hóa một pet."}
+  evolver_2:  {name: "Bậc thầy tiến hóa", counter: evolutions, threshold: 10, reward: {souls: 1500}, description: "Tiến hóa 10 lần."}
+  delver_1:   {name: "Nhà thám hiểm", counter: dungeons, threshold: 1, reward: {souls: 200}, description: "Vượt dungeon đầu tiên."}
+  delver_2:   {name: "Chúa tể dungeon", counter: dungeons, threshold: 25, reward: {souls: 2000, equipment: [diamond_fang]}, description: "Vượt 25 dungeon."}
+  dex_10:     {name: "Nhà sưu tầm", counter: dex, threshold: 10, reward: {souls: 400}, description: "Khám phá 10 pet."}
+  dex_30:     {name: "Bách khoa pet", counter: dex, threshold: 30, reward: {souls: 2500, eggs: {mythic_egg: 1}}, description: "Khám phá 30 pet."}
+  star_5:     {name: "Ngôi sao sáng", counter: stars, threshold: 5, reward: {souls: 800}, description: "Nâng sao tổng cộng 5 lần."}

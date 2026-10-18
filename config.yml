@@ -1,64 +1,91 @@
 # ===== Astrax Pet RPG 2.0 =====
-storage:
-  type: SQLITE            # SQLITE (mặc định) hoặc MYSQL
-  sqlite-file: pets.db    # nằm trong plugins/AstraxPetRPG/
-  mysql: {host: localhost, port: 3306, database: astraxpet, user: root, password: "", use-ssl: false}
-  autosave-minutes: 5
-settings:
-  language: vi
-  starting-souls: 300
-  souls-per-kill: 5
-  xp-per-kill: 12
-  xp-share-inactive: 0.0      # tỉ lệ EXP cho pet không đi cùng (0 = tắt)
+prefix: "&6[Pet] &r"
+debug: false                      # log chi tiết (hoặc /petadmin debug on)
+
+database:
+  type: sqlite                    # sqlite | mysql
+  sqlite-file: "astrax.db"        # nằm trong thư mục plugin
+  mysql:
+    host: localhost
+    port: 3306
+    database: astrax
+    user: root
+    password: ""
+    params: "useSSL=false&characterEncoding=utf8&serverTimezone=UTC"
+autosave-minutes: 5
+
+souls:
+  starting: 100                   # Linh Hồn tặng người chơi mới
+  per-kill: 5                     # Linh Hồn mỗi quái hạ
+  release-refund-per-rarity: 50   # hoàn trả khi thả pet = (độ hiếm+1) * giá trị này
+
+pets:
   auto-summon-on-join: false
-  max-incubators: 3
-  shards-per-duplicate: 3
-  shards-per-star: 5
-  upgrade-souls-per-level: 50
-  starter-pet: fire_common     # pet tặng khi vào server lần đầu (để trống = không tặng)
-  starter-egg: basic
-effects:
-  rare-reveal-min: EPIC        # độ hiếm tối thiểu để có hiệu ứng pháo hoa/title
-  broadcast-min: LEGENDARY     # độ hiếm tối thiểu để thông báo toàn server
-combat:
-  enabled: true
-  tick-interval: 10            # tick giữa 2 lần AI chạy (10 = 0.5s)
-  max-pets-per-tick: 20        # ngân sách xử lý: tối đa pet mỗi lượt -> chống lag
-  search-range: 10.0
+  auto-respawn: true
+  max-respawn-failures: 5
   follow-distance: 3.0
   teleport-distance: 16.0
-  max-targets-aoe: 4
-  protect-owner: true
-  command-cooldown-ms: 400     # chống spam lệnh
-  gui-click-cooldown-ms: 200   # chống spam click GUI
-  mob-elements:                # nguyên tố của quái vanilla (để tính khắc hệ)
-    BLAZE: FIRE
-    MAGMA_CUBE: FIRE
-    STRAY: ICE
-    ZOMBIE: DARK
-    SKELETON: DARK
-    ENDERMAN: DARK
-    CREEPER: LIGHTNING
-    SPIDER: NATURE
-buffs:
-  enabled: true                # pet đang triệu hồi cộng chỉ số cho chủ
-  hp-ratio: 0.25               # % HP pet cộng vào máu tối đa chủ
-  atk-ratio: 0.15
-  speed-ratio: 0.002
-  max-hp-bonus: 20.0
-  max-atk-bonus: 8.0
-  max-speed-bonus: 0.20
-drops:                          # nguyên liệu rơi khi diệt quái: material -> {chance, amount}
-  upgrade_stone: {chance: 0.08, amount: 1}
-  fire_core: {chance: 0.02, amount: 1}
-  ice_core: {chance: 0.02, amount: 1}
-  lightning_core: {chance: 0.02, amount: 1}
-  dark_core: {chance: 0.02, amount: 1}
-  light_core: {chance: 0.02, amount: 1}
-  nature_core: {chance: 0.02, amount: 1}
-  ancient_essence: {chance: 0.002, amount: 1}
-mythicmobs:
-  enabled: true                # tự dùng nếu MythicMobs được cài
-mythiclib:
-  enabled: true
-debug: false
+  level-max-base: 50              # cấp tối đa giai đoạn 0
+  level-max-per-stage: 25         # cộng thêm mỗi lần tiến hóa
+  exp-per-kill: 10
+  boss-exp-multiplier: 5
+  release-requires-confirm: true
+  owner-buff:                     # buff nhỏ cho chủ khi triệu hồi pet (đặt 0 để tắt)
+    max-health-per-pet-hp: 0.10   # cộng máu tối đa = HP pet * hệ số này
+    max-health-cap: 20.0
+    attack-per-pet-atk: 0.05
+    attack-cap: 6.0
+    speed-per-pet-speed: 0.0      # cộng vào hệ số tốc độ (ADD_SCALAR), 0 = tắt
+    speed-cap: 0.05
+
+combat:
+  think-interval-ticks: 10        # chu kỳ AI (10 tick = 0.5s). Tăng để giảm tải.
+  scan-radius: 12.0
+  max-scan-entities: 32           # giới hạn số thực thể quét mỗi lần
+  attack-range: 2.8
+  attack-interval-ms: 1000
+  sticky-target-multiplier: 1.5   # giữ mục tiêu cũ nếu còn trong range*hệ số
+  auto-cast: true                 # pet tự dùng kỹ năng
+  max-aoe-targets: 8
+  max-particles-per-skill: 24
+  max-effects-per-tick: 12        # ngân sách hiệu ứng mỗi nhịp AI cho toàn server
+  skill-global-cooldown-ms: 1500  # chống spam /pet skill
+  taunt: true                     # pet TANK kéo aggro quái khỏi chủ
+  taunt-max-mobs: 3
+  ignore-spawner-mobs: true       # quái từ spawner không cho Linh Hồn/EXP/trứng (chống farm)
+
+egg:
+  incubator-slots: 3
+  instant-hatch-cost-multiplier: 2.0   # /pet gacha: mở ngay không cần ấp
+  hatch-time-multiplier: 1.0
+  default-egg: basic_egg
+  pity:
+    epic-hard: 10                 # chắc chắn >= Epic sau N lần (0 = tắt)
+    legendary-soft: 60            # từ lần này tỉ lệ Legendary+ tăng dần
+    legendary-hard: 90            # chắc chắn >= Legendary
+    soft-boost: 0.06
+  duplicate:
+    convert-to-shards: true       # trùng pet gốc => đổi thành mảnh (nâng sao)
+    bonus-exp: 150                # + EXP cho pet đang sở hữu
+  broadcast-min-rarity: LEGENDARY
+  drops:                          # trứng rơi khi hạ quái: egg, chance (0-1), mobs (* = mọi quái)
+    - {egg: basic_egg, chance: 0.004, mobs: ["*"]}
+    - {egg: rare_egg, chance: 0.0006, mobs: ["*"]}
+    - {egg: fire_egg, chance: 0.003, mobs: [BLAZE, MAGMA_CUBE, ZOMBIFIED_PIGLIN]}
+    - {egg: dark_egg, chance: 0.003, mobs: [ENDERMAN, WITCH, PHANTOM]}
+    - {egg: nature_egg, chance: 0.003, mobs: [SPIDER, CAVE_SPIDER, SLIME]}
+
+dex-rewards:                      # thưởng khi số pet khám phá đạt mốc (tự trao một lần)
+  5: {souls: 200}
+  15: {souls: 600, eggs: {rare_egg: 1}}
+  30: {souls: 1500, eggs: {mythic_egg: 1}}
+  50: {souls: 4000, eggs: {mythic_egg: 2}}
+
+gui:
+  click-cooldown-ms: 150
+  command-cooldown-ms: 300
+
+hooks:
+  mythicmobs: true                # dùng MythicMobs nếu có (pet mythic-mob, dungeon mythic, mythic-skill)
+  mythiclib: true                 # đọc chỉ số MythicLib 'ASTRAX_PET_DAMAGE' (%) nhân vào sát thương pet
+  placeholderapi: true

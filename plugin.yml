@@ -1,38 +1,32 @@
 name: AstraxPetRPG
-version: ${project.version}
+version: '2.0.0'
 main: vn.soulpets.SoulPetsPlugin
-api-version: 1.21
-description: Astrax Pet RPG - pet, trứng, tiến hóa, kỹ năng, AI chiến đấu, GUI.
+api-version: '1.21'
+description: Astrax Pet RPG - pet nguyên tố, trứng, tiến hóa, dungeon, nhiệm vụ, PetDex.
 author: Astrax
 softdepend: [PlaceholderAPI, MythicMobs, MythicLib]
-# Paper tự tải thư viện JDBC từ Maven Central ở lần chạy đầu (cần internet 1 lần)
+# Paper tải thư viện JDBC lúc khởi động server (không cần shade vào jar)
 libraries:
   - org.xerial:sqlite-jdbc:3.47.1.0
   - com.mysql:mysql-connector-j:8.4.0
 commands:
   pet:
     description: Menu và lệnh pet của bạn.
-    usage: /pet [menu|collection|eggs|summon|dismiss|info|souls|skill|rename]
-    aliases: [pets, astraxpet]
-    permission: astraxpet.use
+    usage: /pet <menu|summon|dismiss|stats|skill|evolve|equip|egg|gacha|dex|quests|top|dungeon|rename|release|help>
+    aliases: [pets]
+    permission: soulpets.use
   petadmin:
     description: Quản trị Astrax Pet RPG.
-    usage: /petadmin <reload|debug|list|give|egg|gear|material|souls|xp>
-    permission: astraxpet.admin
+    usage: /petadmin <give|set|reset|info|reload|save|debug|setdungeon|dungeon>
+    aliases: [padmin]
+    permission: soulpets.admin
 permissions:
-  astraxpet.use:
-    description: Dùng lệnh /pet và GUI.
-    default: true
-  astraxpet.admin:
-    description: Dùng /petadmin.
-    default: op
   soulpets.use:
-    description: (Tương thích bản cũ) tương đương astraxpet.use.
+    description: Dùng lệnh /pet
     default: true
-    children:
-      astraxpet.use: true
+  soulpets.dungeon:
+    description: Tham gia dungeon
+    default: true
   soulpets.admin:
-    description: (Tương thích bản cũ) tương đương astraxpet.admin.
+    description: Quản trị plugin
     default: op
-    children:
-      astraxpet.admin: true

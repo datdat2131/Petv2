@@ -1,21 +1,30 @@
-# weights: tỉ lệ tương đối. pity: "nếu N lần ấp liên tiếp chưa ra độ hiếm >= X thì lần N chắc chắn ra >= X".
+# weights: tỉ lệ tương đối (không cần cộng đủ 100). element: giới hạn hệ pet trong trứng (để trống = mọi hệ).
+# cost: giá bằng Linh Hồn khi mua. hatch-seconds: thời gian ấp. Pity cấu hình trong config.yml (egg.pity).
 eggs:
-  basic:
+  basic_egg:
     name: "Trứng Thường"
+    icon: TURTLE_EGG
     cost: 100
-    hatch-seconds: 60
-    weights: {COMMON: 60, UNCOMMON: 28, RARE: 10, EPIC: 2}
-    pity: {RARE: 10, EPIC: 50}
-  elemental_fire:
-    name: "Trứng Hỏa Nguyên"
-    cost: 400
-    hatch-seconds: 300
-    element: FIRE            # chỉ ra pet hệ này (nếu pool rỗng sẽ lấy hệ bất kỳ)
-    weights: {UNCOMMON: 40, RARE: 35, EPIC: 18, LEGENDARY: 6, MYTHIC: 1}
-    pity: {EPIC: 15, LEGENDARY: 60, MYTHIC: 200}
+    hatch-seconds: 30
+    element: ""
+    weights: {COMMON: 60, UNCOMMON: 25, RARE: 10, EPIC: 3.5, LEGENDARY: 1.2, MYTHIC: 0.28, ANCIENT: 0.02}
+  rare_egg:
+    name: "Trứng Hiếm"
+    icon: SNIFFER_EGG
+    cost: 500
+    hatch-seconds: 120
+    element: ""
+    weights: {UNCOMMON: 40, RARE: 35, EPIC: 15, LEGENDARY: 7, MYTHIC: 2.7, ANCIENT: 0.3}
   mythic_egg:
-    name: "Trứng Thần Thoại"
-    cost: 3000
-    hatch-seconds: 1800
-    weights: {EPIC: 50, LEGENDARY: 38, MYTHIC: 11, ANCIENT: 1}
-    pity: {LEGENDARY: 10, MYTHIC: 40, ANCIENT: 300}
+    name: "Trứng Huyền Thoại"
+    icon: DRAGON_EGG
+    cost: 5000
+    hatch-seconds: 600
+    element: ""
+    weights: {EPIC: 50, LEGENDARY: 35, MYTHIC: 13, ANCIENT: 2}
+  fire_egg:      {name: "Trứng Lửa", icon: MAGMA_BLOCK, cost: 300, hatch-seconds: 60, element: FIRE, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
+  ice_egg:       {name: "Trứng Băng", icon: PACKED_ICE, cost: 300, hatch-seconds: 60, element: ICE, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
+  lightning_egg: {name: "Trứng Sét", icon: COPPER_BLOCK, cost: 300, hatch-seconds: 60, element: LIGHTNING, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
+  dark_egg:      {name: "Trứng Bóng Tối", icon: OBSIDIAN, cost: 300, hatch-seconds: 60, element: DARK, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
+  light_egg:     {name: "Trứng Ánh Sáng", icon: GLOWSTONE, cost: 300, hatch-seconds: 60, element: LIGHT, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
+  nature_egg:    {name: "Trứng Thiên Nhiên", icon: MOSS_BLOCK, cost: 300, hatch-seconds: 60, element: NATURE, weights: {COMMON: 40, UNCOMMON: 25, RARE: 18, EPIC: 10, LEGENDARY: 5, MYTHIC: 1.8, ANCIENT: 0.2}}
