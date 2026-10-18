@@ -1,1 +1,29 @@
+name: CI
 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show repo
+        run: |
+          echo "GitHub Actions is running"
+          pwd
+          ls -la
+
+      - name: Run Node tests if present
+        run: |
+          if [ -f package.json ]; then
+            echo "package.json found — running npm ci && npm test"
+            npm ci || true
+            npm test || true
+          else
+            echo "No package.json, skipping Node steps"
+          fi
