@@ -1,29 +1,47 @@
-name: CI
+name: Build AstraxPetRPG
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      
+name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Show repo
-        run: |
-          echo "GitHub Actions is running"
-          pwd
-          ls -la
+      
+name: Set up Java 21
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '21'
+        cache: maven
 
-      - name: Run Node tests if present
-        run: |
-          if [ -f package.json ]; then
-            echo "package.json found — running npm ci && npm test"
-            npm ci || true
-            npm test || true
-          else
-            echo "No package.json, skipping Node steps"
-          fi
+      
+name: Build and test
+      run: mvn -B clean package
+
+      
+name: Verify JAR
+      run: |
+        JAR="$(ls target/AstraxPetRPG-.jar | head -n1)"
+        echo "JAR: $JAR"
+        unzip -Z1 "$JAR" | grep -qx "plugin.yml" || { echo "plugin.yml không nằm ở root JAR"; exit 1; }
+        MAIN=$(unzip -p "$JAR" plugin.yml | sed -n 's/^main:[[:space:]]//p' | tr -d '\r')
+        unzip -Z1 "$JAR" | grep -qx "$(echo "$MAIN" | tr . /).class"  { echo "Không có class main $MAIN"; exit 1; }
+        for k in version api-version commands permissions; do
+          unzip -p "$JAR" plugin.yml | grep -q "^$k:"  { echo "plugin.yml thiếu $k"; exit 1; }
+        done
+        echo "OK: main=$MAIN"
+
+      
+name: Upload JAR
+      uses: actions/upload-artifact@v4
+      with:
+        name: AstraxPetRPG
+        path: target/AstraxPetRPG-*.jar
+        if-no-files-found: error
